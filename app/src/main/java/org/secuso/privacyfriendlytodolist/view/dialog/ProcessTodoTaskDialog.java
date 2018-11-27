@@ -73,6 +73,7 @@ public class ProcessTodoTaskDialog extends FullScreenDialog {
     private String name, description;
     private long deadline = -1;
     private long reminderTime = -1;
+    private long repeatOp = -1;
 
     private TodoTask.Priority defaultPriority = TodoTask.Priority.MEDIUM;
 
@@ -202,6 +203,7 @@ public class ProcessTodoTaskDialog extends FullScreenDialog {
                     task.setListId(selectedListID);
                     task.setProgress(taskProgress);
                     task.setReminderTime(reminderTime);
+                    task.setRepeat(repeatOp);
                     callback.finish(task);
                     ProcessTodoTaskDialog.this.dismiss();
                 }
@@ -217,7 +219,7 @@ public class ProcessTodoTaskDialog extends FullScreenDialog {
             }
         });
 
-        // initialize textviews to get deadline and reminder time
+        // initialize textviews to get deadline and reminder time and repeat
         deadlineTextView = (TextView) findViewById(R.id.tv_todo_list_deadline);
         deadlineTextView.setTextColor(okayButton.getCurrentTextColor());
         deadlineTextView.setOnClickListener(new View.OnClickListener() {

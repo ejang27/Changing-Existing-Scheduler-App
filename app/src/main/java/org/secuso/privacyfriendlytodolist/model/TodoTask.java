@@ -73,6 +73,7 @@ public class TodoTask extends BaseTodo implements Parcelable {
     private int progress;
     private Priority priority;
     private long reminderTime = -1; // absolute timestamp
+    private long repeatOp = -1;
     private int listPosition; // indicates at what position inside the list this task it placed
     private int listIdForeignKey;
     protected long deadline; // absolute timestamp
@@ -253,8 +254,14 @@ public class TodoTask extends BaseTodo implements Parcelable {
         reminderTimeWasInitialized = true;
     }
 
-    public void setRepeat(long reminderTime){
-        
+    public void setRepeat(long repeatOp){
+        if(reminderTime < 0) {
+            Log.i(TAG, "Reminder time specified to set the repeat function.");
+
+        }
+        else {
+            this.repeatOp = repeatOp;
+        }
     }
 
     public boolean reminderTimeChanged() {
