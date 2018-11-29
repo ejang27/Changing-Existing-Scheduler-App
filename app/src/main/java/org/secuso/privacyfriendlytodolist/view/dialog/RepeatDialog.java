@@ -22,27 +22,12 @@ public class RepeatDialog extends FullScreenDialog {
     public RepeatDialog(Context context, long reminderTime, long deadline) {
         super(context, R.layout.repeat_dialog);
 
-        Button buttonDate = (Button) findViewById(R.id.bt_repeat_never);
-        buttonDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // LinearLayout layoutDate = (LinearLayout)findViewById(R.id.ll_reminder_date);
-                //layoutDate.setVisibility(View.VISIBLE);
-                //LinearLayout layoutTime = (LinearLayout)findViewById(R.id.ll_reminder_time);
-               // layoutTime.setVisibility(View.GONE);
-            }
-        });
 
         Button buttonDay = (Button) findViewById(R.id.bt_repeat_everyday);
         buttonDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePicker datePicker = (DatePicker) findViewById(R.id.dp_reminder);
-                TimePicker timePicker = (TimePicker) findViewById(R.id.tp_reminder);
-                Calendar calendar = new GregorianCalendar(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getCurrentHour(), timePicker.getCurrentMinute());
-
-                callback.setRepeat(-1);
-
+                callback.setEveryday();
                 dismiss();
             }
         });
@@ -51,11 +36,7 @@ public class RepeatDialog extends FullScreenDialog {
         buttonWeek.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePicker datePicker = (DatePicker) findViewById(R.id.dp_reminder);
-                TimePicker timePicker = (TimePicker) findViewById(R.id.tp_reminder);
-                Calendar calendar = new GregorianCalendar(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getCurrentHour(), timePicker.getCurrentMinute());
-
-                //callback.setReminder(TimeUnit.MILLISECONDS.toSeconds(calendar.getTimeInMillis()));
+                callback.setEveryWeek();
 
                 dismiss();
             }
@@ -65,11 +46,8 @@ public class RepeatDialog extends FullScreenDialog {
         buttonMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePicker datePicker = (DatePicker) findViewById(R.id.dp_reminder);
-                TimePicker timePicker = (TimePicker) findViewById(R.id.tp_reminder);
-                Calendar calendar = new GregorianCalendar(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getCurrentHour(), timePicker.getCurrentMinute());
 
-                //callback.setReminder(TimeUnit.MILLISECONDS.toSeconds(calendar.getTimeInMillis()));
+                callback.setEveryMonth();
 
                 dismiss();
             }
@@ -79,18 +57,14 @@ public class RepeatDialog extends FullScreenDialog {
         buttonYear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePicker datePicker = (DatePicker) findViewById(R.id.dp_reminder);
-                TimePicker timePicker = (TimePicker) findViewById(R.id.tp_reminder);
-                Calendar calendar = new GregorianCalendar(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getCurrentHour(), timePicker.getCurrentMinute());
-
-                //callback.setReminder(TimeUnit.MILLISECONDS.toSeconds(calendar.getTimeInMillis()));
+                callback.setEveryYear();
 
                 dismiss();
             }
         });
 
-        Button buttonNoReminder = (Button) findViewById(R.id.bt_repeat_never);
-        buttonNoReminder.setOnClickListener(new View.OnClickListener() {
+        Button buttonNoRepeat = (Button) findViewById(R.id.bt_repeat_never);
+        buttonNoRepeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callback.removeRepeat();
@@ -101,7 +75,10 @@ public class RepeatDialog extends FullScreenDialog {
 
 
     public interface RepeatCallback {
-        void setRepeat(long deadline);
+        void setEveryday();
+        void setEveryWeek();
+        void setEveryMonth();
+        void setEveryYear();
         void removeRepeat();
     }
 

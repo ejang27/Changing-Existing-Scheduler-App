@@ -285,20 +285,38 @@ public class ProcessTodoTaskDialog extends FullScreenDialog {
             public void onClick(View v) {
                 RepeatDialog repeatDialog = new RepeatDialog(getContext(), reminderTime, deadline);
                 repeatDialog.setCallback(new RepeatDialog.RepeatCallback() {
-                    public void setRepeat(long r) {
 
-                        /*if(deadline == -1) {
-                            Toast.makeText(getContext(), getContext().getString(R.string.set_deadline_before_reminder), Toast.LENGTH_SHORT).show();
-                            return;
-                        }*/
-
+                    public void setEveryday(){
                         if (reminderTime == -1) {
                             Toast.makeText(getContext(), getContext().getString(R.string.set_reminder_before_repeat), Toast.LENGTH_SHORT).show();
                             return;
                         }
-
-                        reminderTime = r;
-                        repeatTextView.setText(R.string.everyday_repeat);
+                        TextView repeatTextView = (TextView) findViewById(R.id.tv_todo_list_repeat);
+                        repeatTextView.setText(getContext().getResources().getString(R.string.everyday_repeat));
+                    }
+                    public void setEveryWeek(){
+                        if (reminderTime == -1) {
+                            Toast.makeText(getContext(), getContext().getString(R.string.set_reminder_before_repeat), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        TextView repeatTextView = (TextView) findViewById(R.id.tv_todo_list_repeat);
+                        repeatTextView.setText(getContext().getResources().getString(R.string.everyweek_repeat));
+                    }
+                    public void setEveryMonth(){
+                        if (reminderTime == -1) {
+                            Toast.makeText(getContext(), getContext().getString(R.string.set_reminder_before_repeat), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        TextView repeatTextView = (TextView) findViewById(R.id.tv_todo_list_repeat);
+                        repeatTextView.setText(getContext().getResources().getString(R.string.everymonth_repeat));
+                    }
+                    public void setEveryYear(){
+                        if (reminderTime == -1) {
+                            Toast.makeText(getContext(), getContext().getString(R.string.set_reminder_before_repeat), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        TextView repeatTextView = (TextView) findViewById(R.id.tv_todo_list_repeat);
+                        repeatTextView.setText(getContext().getResources().getString(R.string.everyyear_repeat));
                     }
 
                     @Override
